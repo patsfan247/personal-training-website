@@ -19,17 +19,17 @@ create policy "Can update own user data." on users for update using (auth.uid() 
 /**
 * This trigger automatically creates a user entry when a new user signs up via Supabase Auth.
 */ 
-create function public.handle_new_user() 
-returns trigger as $$
-begin
-  insert into public.users (id, full_name, avatar_url)
-  values (new.id, new.raw_user_meta_data->>'full_name', new.raw_user_meta_data->>'avatar_url');
-  return new;
-end;
-$$ language plpgsql security definer;
-create trigger on_auth_user_created
-  after insert on auth.users
-  for each row execute procedure public.handle_new_user();
+-- create function public.handle_new_user() 
+-- returns trigger as $$
+-- begin
+--   insert into public.users (id, full_name, avatar_url)
+--   values (new.id, new.raw_user_meta_data->>'full_name', new.raw_user_meta_data->>'avatar_url');
+--   return new;
+-- end;
+-- $$ language plpgsql security definer;
+-- create trigger on_auth_user_created
+--   after insert on auth.users
+--   for each row execute procedure public.handle_new_user();
 
 /**
 * CUSTOMERS
@@ -69,8 +69,8 @@ create policy "Allow public read-only access." on products for select using (tru
 * PRICES
 * Note: prices are created and managed in Stripe and synced to our DB via Stripe webhooks.
 */
-create type pricing_type as enum ('one_time', 'recurring');
-create type pricing_plan_interval as enum ('day', 'week', 'month', 'year');
+-- create type pricing_type as enum ('one_time', 'recurring');
+-- create type pricing_plan_interval as enum ('day', 'week', 'month', 'year');
 create table prices (
   -- Price ID from Stripe, e.g. price_1234.
   id text primary key,
@@ -102,7 +102,7 @@ create policy "Allow public read-only access." on prices for select using (true)
 * SUBSCRIPTIONS
 * Note: subscriptions are created and managed in Stripe and synced to our DB via Stripe webhooks.
 */
-create type subscription_status as enum ('trialing', 'active', 'canceled', 'incomplete', 'incomplete_expired', 'past_due', 'unpaid', 'paused');
+-- create type subscription_status as enum ('trialing', 'active', 'canceled', 'incomplete', 'incomplete_expired', 'past_due', 'unpaid', 'paused');
 create table subscriptions (
   -- Subscription ID from Stripe, e.g. sub_1234.
   id text primary key,

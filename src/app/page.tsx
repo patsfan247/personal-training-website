@@ -22,12 +22,12 @@ function HeroSection() {
         <div className='relative z-10 flex flex-col gap-5 lg:max-w-xl lg:pl-8'>
           <div className='w-fit rounded-full bg-gradient-to-r from-[#616571] via-[#7782A9] to-[#826674] px-4 py-1 '>
             <span className='font-alt text-sm font-semibold text-black mix-blend-soft-light'>
-              Generate banners with DALL·E
+            Your Personal Trainer, On Demand
             </span>
           </div>
-          <h1>Instantly craft stunning Twitter banners.</h1>
+          <h1>Workouts That Fit Your Schedule, Anytime, Anywhere</h1>
           <Button asChild variant='sexy'>
-            <Link href='/signup'>Get started for free</Link>
+            <Link href='/signup'>Start your journey now</Link>
           </Button>
         </div>
       </Container>
